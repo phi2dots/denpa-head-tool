@@ -45,7 +45,28 @@ function jsonWriterPlugin(): Plugin {
   };
 }
 
+function copyStaticDataPlugin(): Plugin {
+  return {
+    name: "denpa-copy-static-data",
+    apply: "build",
+    closeBundle() {
+      const root = process.cwd();
+      const outDir = path.join(root, "dist");
+      const targets: Array<[string, string]> = [
+        ["data", "data"],
+        ["assets", "assets"],
+      ];
+
+      for (const [sourceDir, targetDir] of targets) {
+        const source = path.join(root, sourceDir);
+        if (!fs.existsSync(source)) continue;
+        fs.cpSync(source, path.join(outDir, targetDir), { recursive: true });
+      }
+    },
+  };
+}
+
 export default defineConfig({
   base: "./",
-  plugins: [react(), jsonWriterPlugin()],
+  plugins: [react(), jsonWriterPlugin(), copyStaticDataPlugin()],
 });
