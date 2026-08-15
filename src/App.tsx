@@ -126,6 +126,9 @@ export function App() {
         <div>
           <p className="eyebrow">new 電波人間のRPG FREE</p>
           <h1>頭の形 遺伝検索ツール</h1>
+          <p className="header-description">
+            頭の形ごとの特徴と標準出生ルートを検索し、進化元・進化先の組み合わせ候補を確認できます。
+          </p>
         </div>
         {SHOW_DEV_TOOLS && (
           <div className="topbar-actions">
